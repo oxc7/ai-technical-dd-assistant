@@ -6,6 +6,16 @@ Built for the reality that a target often **doesn't know what it doesn't know** 
 
 > This is an early-stage screen to focus confirmatory diligence and value-creation planning. It is **not** a substitute for confirmatory technical, legal, or financial diligence.
 
+## Screenshots
+
+Ingest a target's documents, then generate the memo. Shown in **demo mode** (no API key → in-memory knowledge base + a sample memo):
+
+![Knowledge base and target intake](docs/screenshots/memo.png)
+
+The structured findings table — each finding grounded in the retrieved evidence, with a triage risk level:
+
+![Findings table with risk levels and evidence](docs/screenshots/findings.png)
+
 ## What it produces
 
 A structured memo with:
@@ -85,6 +95,26 @@ lib/
 components/              # memo, findings table, SWOT, opportunities, roll-up fit
 prisma/                  # schema + seed
 ```
+
+## Limitations
+
+This is a diligence **screen**, not a substitute for confirmatory diligence — and the prototype has clear edges:
+
+- **Mock mode is illustrative.** Without `ANTHROPIC_API_KEY`, the memo is a fixed sample so the demo always runs; it is not analysis of your input.
+- **The local embedding is demo-grade** (lexical, not semantic). Production-quality retrieval needs `VOYAGE_API_KEY` and the Postgres + pgvector backend.
+- **Single-pass retrieval.** Top-k per dimension with no re-ranking, query expansion, or citation back to the exact source span yet.
+- **No auth / multi-tenancy / persistence guarantees** on the in-memory backend (process-local, ephemeral).
+- **Input is trusted text.** No document parsing (PDF/DOCX), OCR, or ingestion of live repos/data rooms yet.
+- **The model can be wrong.** Findings are prompts for human review, not determinations; always verify against the source.
+
+## Roadmap
+
+- Wire the production path end to end (Voyage embeddings + Postgres/pgvector) with a seeded demo dataset.
+- Add an **evaluation harness** for memo quality (rubric-graded, so output is measured, not asserted).
+- **Source citations** that link each finding back to the exact ingested passage.
+- **Connectors**: ingest a GitHub repo, a website, or a data-room export directly.
+- **Export**: one-click memo to PDF / IC-ready slide.
+- Multi-target **portfolio view** to compare diligence across a pipeline.
 
 ## License
 
