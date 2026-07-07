@@ -1,0 +1,15 @@
+services:
+  db:
+    image: pgvector/pgvector:pg16
+    container_name: dd-assistant-db
+    environment:
+      POSTGRES_USER: dd
+      POSTGRES_PASSWORD: dd
+      POSTGRES_DB: dd_assistant
+    ports:
+      - "5432:5432"
+    volumes:
+      - dd_pgdata:/var/lib/postgresql/data
+
+volumes:
+  dd_pgdata:

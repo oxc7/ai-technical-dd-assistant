@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  background:
+    radial-gradient(1100px 500px at 80% -10%, rgba(124, 92, 255, 0.14), transparent 60%),
+    #0a0b12;
+  color: #e8eaf2;
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+}
+
+.font-serif {
+  font-family: 'Fraunces', Georgia, serif;
+}
+
+.card {
+  background: linear-gradient(180deg, #141726, #191d30);
+  border: 1px solid #262b42;
+  border-radius: 16px;
+}
+
+.input {
+  width: 100%;
+  background: #10121d;
+  border: 1px solid #262b42;
+  border-radius: 10px;
+  padding: 10px 12px;
+  color: #e8eaf2;
+  font-size: 0.95rem;
+}
+.input:focus {
+  outline: none;
+  border-color: rgba(124, 92, 255, 0.6);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 11px;
+  padding: 10px 18px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease, box-shadow 0.2s ease;
+}
+.btn-primary {
+  background: linear-gradient(135deg, #7c5cff, #5a43e0);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(124, 92, 255, 0.35);
+}
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+.btn-primary:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.btn-ghost {
+  border: 1px solid #262b42;
+  background: #141726;
+  color: #e8eaf2;
+}
+.btn-ghost:hover {
+  border-color: #7c5cff;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.badge-high {
+  color: #ff9a9a;
+  background: rgba(255, 90, 90, 0.12);
+  border-color: rgba(255, 90, 90, 0.35);
+}
+.badge-med {
+  color: #f5c877;
+  background: rgba(240, 180, 80, 0.12);
+  border-color: rgba(240, 180, 80, 0.35);
+}
+.badge-low {
+  color: #86e0b4;
+  background: rgba(52, 224, 160, 0.12);
+  border-color: rgba(52, 224, 160, 0.35);
+}

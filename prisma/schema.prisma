@@ -1,0 +1,49 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["postgresqlExtensions"]
+}
+
+datasource db {
+  provider   = "postgresql"
+  url        = env("DATABASE_URL")
+  extensions = [vector]
+}
+
+model Company {
+  id        String     @id @default(cuid())
+  name      String
+  sector    String?
+  createdAt DateTime   @default(now())
+  documents Document[]
+  memos     Memo[]
+}
+
+model Document {
+  id        String   @id @default(cuid())
+  companyId String
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  title     String
+  kind      String   @default("technical") // technical | business | other
+  content   String
+  createdAt DateTime @default(now())
+  chunks    Chunk[]
+}
+
+model Chunk {
+  id         String   @id @default(cuid())
+  documentId String
+  document   Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  content    String
+  // Embedding stored via pgvector. Managed with raw SQL in lib/kb/postgres.ts
+  // because Prisma has no native vector column type yet.
+  createdAt  DateTime @default(now())
+}
+
+model Memo {
+  id        String   @id @default(cuid())
+  companyId String
+  company   Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  payload   Json
+  source    String   @default("ai") // ai | mock
+  createdAt DateTime @default(now())
+}
